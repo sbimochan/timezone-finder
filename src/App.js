@@ -9,32 +9,25 @@ import 'react-times/css/material/default.css';
 import 'react-times/css/classic/default.css';
 
 function App() {
-  const [fromHour,
-    setFromHour] = useState(9);
-  const [fromMinute,
-    setFromMinute] = useState(15);
-  const [toHour,
-    setToHour] = useState(11);
-  const [toMinute,
-    setToMinute] = useState(15);
+  const [hour,
+    setHour] = useState(11);
+  const [minute,
+    setMinute] = useState(15);
   const [timeDiff,
     setTimeDiff] = useState(0);
 
   useEffect(() => {
-    let fromTime = fromHour * 60 + fromMinute;
-    let toTime = toHour * 60 + toMinute;
-    console.log({fromTime});
-    console.log({toTime})
     let currentDate = new Date();
+    let fromTime = currentDate.getHours() * 60 + currentDate.getMinutes();
+    let toTime = hour * 60 + minute;
     let currentTimeZoneOffset = currentDate.getTimezoneOffset();
     let minutesDifference = (fromTime - toTime) + currentTimeZoneOffset;
-    console.log(minutesDifference)
     if (minutesDifference > 0) {
-      setTimeDiff(minutesToHoursConverter(minutesDifference));
-
-    } else {
-
+      
       setTimeDiff('-'+ minutesToHoursConverter(minutesDifference));
+    } else {
+      
+      setTimeDiff(minutesToHoursConverter(minutesDifference));
     }
 
   });
@@ -52,7 +45,7 @@ function App() {
         <h1>Time zone finder</h1>
       </div>
       <div className='row'>
-        <div className='six columns'>
+        {/* <div className='six columns'>
           <h4>Your time</h4>
           <TimePicker
             onTimeChange={(options) => {
@@ -60,13 +53,13 @@ function App() {
             setFromMinute(parseInt(options.minute), 10);
           }}
             time={fromHour + ':' + fromMinute}/>
-        </div>
+        </div> */}
         <div className='six columns'>
           <h4>Their time</h4>
           <TimePicker
             onTimeChange=
-            { (options) => { setToHour(parseInt(options.hour,10)); setToMinute(parseInt(options.minute,10)); } }
-            time={toHour + ':' + toMinute}/>
+            { (options) => { setHour(parseInt(options.hour,10)); setMinute(parseInt(options.minute,10)); } }
+            time={hour + ':' + minute}/>
         </div>
       </div>
       <div className='row'>
