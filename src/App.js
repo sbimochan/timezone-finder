@@ -9,11 +9,13 @@ import {timezoneOffset} from './timezoneOffset';
 
 function App() {
   const [hour,
-    setHour] = useState(11);
+    setHour] = useState(10);
   const [minute,
-    setMinute] = useState(15);
+    setMinute] = useState(42);
   const [timeDiff,
     setTimeDiff] = useState(0);
+  const [offset,
+    setOffset] = useState([]);
 
   useEffect(() => {
     let currentDate = new Date();
@@ -21,11 +23,19 @@ function App() {
     let toTime = hour * 60 + minute;
     let currentTimeZoneOffset = currentDate.getTimezoneOffset();
     let minutesDifference = (fromTime - toTime) + currentTimeZoneOffset;
-    console.log(new Date())
     if (minutesDifference > 0) {
-      setTimeDiff('-' + timeTransformer(minutesDifference));
+      setTimeDiff(parseInt('-' + timeTransformer(minutesDifference)), 10);
     } else {
       setTimeDiff(timeTransformer(minutesDifference));
+    }
+    console.log(timeDiff)
+    // debugger
+    let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
+    console.log(timezone)
+    if (timezone) {
+      setOffset(timezone)
+    } else {
+      setOffset(null)
     }
 
   });
@@ -37,12 +47,12 @@ function App() {
     let roundUp = Math.round(minute / 15) * 15
     if (roundUp) {
       let time = hour + '.' + roundUp;
-      return time
+      return parseInt(time, 10);
     } else {
       return hour
     }
   }
-  
+
   return (
     <div className='container'>
       <div className="row">
@@ -50,7 +60,6 @@ function App() {
       </div>
       <div className='row'>
         <div className='six columns'>
-          <h4>Their time</h4>
           <TimePicker
             onTimeChange=
             { (options) => { setHour(parseInt(options.hour,10)); setMinute(parseInt(options.minute,10)); } }
@@ -58,7 +67,9 @@ function App() {
         </div>
       </div>
       <div className='row'>
-        {timeDiff}
+        <ul>
+          {offset.map(el => <li>{el.utc +' '+ el.text}</li>)}
+        </ul>
       </div>
     </div>
   )
