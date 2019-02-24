@@ -1,7 +1,6 @@
 import './normalize.css';
 import './skeleton.css';
 import 'react-times/css/material/default.css';
-import 'react-times/css/classic/default.css';
 import React, {useState, useEffect} from 'react';
 
 import TimePicker from 'react-times';
