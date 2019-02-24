@@ -12,6 +12,8 @@ function App() {
     setHour] = useState(10);
   const [minute,
     setMinute] = useState(42);
+  const [meridiem,
+    setMeridiem] = useState('PM');
   const [timeDiff,
     setTimeDiff] = useState(0);
   const [offset,
@@ -28,48 +30,54 @@ function App() {
     } else {
       setTimeDiff(timeTransformer(minutesDifference));
     }
-    console.log(timeDiff)
-    // debugger
+  });
+  useEffect(() => {
     let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
     console.log(timezone)
     if (timezone) {
-      setOffset(timezone)
+      setOffset(timezone);
     } else {
-      setOffset(null)
+      setOffset([]);
     }
-
-  });
+  })
 
   function timeTransformer(minutesDifference) {
     minutesDifference = Math.abs(minutesDifference);
     let hour = Math.floor(minutesDifference / 60);
     let minute = minutesDifference % 60;
-    let roundUp = Math.round(minute / 15) * 15
+    let roundUp = Math.round(minute / 15) * 15;
     if (roundUp) {
       let time = hour + '.' + roundUp;
       return parseInt(time, 10);
     } else {
-      return hour
+      return hour;
     }
   }
 
   return (
     <div className='container'>
-      <div className="row">
-        <h1>Time zone finder</h1>
+      <div className="row mb-30">
+        <h3>Time zone finder</h3>
       </div>
       <div className='row'>
         <div className='six columns'>
           <TimePicker
+            focused
             onTimeChange=
-            { (options) => { setHour(parseInt(options.hour,10)); setMinute(parseInt(options.minute,10)); } }
-            time={hour + ':' + minute}/>
+            { (options) => { setHour(parseInt(options.hour, 10)); setMinute(parseInt(options.minute, 10)); setMeridiem(options.meridiem); console.log(options) } }
+            time={hour + ':' + minute}
+            meridiem={meridiem}
+            theme="material"
+            colorPalette="dark"
+            timeMode="12"
+            showTimezone={true}
+            closeOnOutsideClick={false}/>
         </div>
-      </div>
-      <div className='row'>
-        <ul>
-          {offset.map(el => <li>{el.utc +' '+ el.text}</li>)}
-        </ul>
+        <div className="six columns">
+          <ul>
+            {offset.map(el => <li>{el.utc + ' ' + el.text}</li>)}
+          </ul>
+        </div>
       </div>
     </div>
   )
