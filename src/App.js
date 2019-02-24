@@ -62,7 +62,7 @@ function App() {
           <TimePicker
             focused
             onTimeChange=
-            { (options) => { setHour(parseInt(options.hour, 10)); setMinute(parseInt(options.minute, 10)); setMeridiem(options.meridiem); console.log(options) } }
+            { (options) => { setHour(parseInt(options.hour, 10)); setMinute(parseInt(options.minute, 10)); setMeridiem(options.meridiem);} }
             time={hour + ':' + minute}
             meridiem={meridiem}
             theme="material"
