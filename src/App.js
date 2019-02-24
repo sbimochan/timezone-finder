@@ -32,7 +32,6 @@ function App() {
   });
   useEffect(() => {
     let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
-    console.log(timezone)
     if (timezone) {
       setOffset(timezone);
     } else {
