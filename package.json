@@ -1,7 +1,7 @@
 {
   "name": "timezone-finder",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
   "homepage": "https://sbimochan.github.io/timezone-finder",
   "dependencies": {
     "gh-pages": "^2.0.1",
