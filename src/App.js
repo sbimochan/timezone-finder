@@ -4,13 +4,13 @@ import 'react-times/css/material/default.css';
 import React, {useState, useEffect} from 'react';
 
 import TimePicker from 'react-times';
-import {timezoneOffset} from './timezoneOffset';
+import { timezoneOffset } from './timezoneOffset';
 
 function App() {
   const [hour,
     setHour] = useState(10);
   const [minute,
-    setMinute] = useState(42);
+    setMinute] = useState(45);
   const [meridiem,
     setMeridiem] = useState('PM');
   const [timeDiff,
@@ -21,23 +21,24 @@ function App() {
   useEffect(() => {
     let currentDate = new Date();
     let fromTime = currentDate.getHours() * 60 + currentDate.getMinutes();
-    let toTime = hour * 60 + minute;
+    let toTime = meridiem === 'PM' ? (hour + 12) * 60 + minute : hour * 60 + minute;
     let currentTimeZoneOffset = currentDate.getTimezoneOffset();
     let minutesDifference = (fromTime - toTime) + currentTimeZoneOffset;
     if (minutesDifference > 0) {
-      setTimeDiff(parseInt('-' + timeTransformer(minutesDifference)), 10);
+      setTimeDiff(parseInt('-' + timeTransformer(minutesDifference),10));
     } else {
       setTimeDiff(timeTransformer(minutesDifference));
     }
   });
+
   useEffect(() => {
-    let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
-    if (timezone) {
-      setOffset(timezone);
-    } else {
-      setOffset([]);
-    }
-  })
+		let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
+		if (timezone) {
+			setOffset(timezone);
+		} else {
+			setOffset([]);
+		}
+	});
 
   function timeTransformer(minutesDifference) {
     minutesDifference = Math.abs(minutesDifference);
@@ -73,7 +74,7 @@ function App() {
         </div>
         <div className="six columns">
           <ul>
-            {offset.map(el => <li>{el.utc + ' ' + el.text}</li>)}
+            {offset.map((el, index) => <li key={index}>{el.utc + ' ' + el.text}</li>)}
           </ul>
         </div>
       </div>
