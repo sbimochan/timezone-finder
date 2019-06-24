@@ -44,7 +44,7 @@ function App() {
     minutesDifference = Math.abs(minutesDifference);
     let hour = Math.floor(minutesDifference / 60);
     let minute = minutesDifference % 60;
-    let roundUp = Math.round(minute / 15) * 15;
+    let roundUp = Math.round(minute / 5) * 5;
     if (roundUp) {
       let time = hour + '.' + roundUp;
       return parseInt(time, 10);
