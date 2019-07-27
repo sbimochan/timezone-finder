@@ -1,7 +1,7 @@
 import './normalize.css';
 import './skeleton.css';
 import 'react-times/css/material/default.css';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 import TimePicker from 'react-times';
 import { timezoneOffset } from './timezoneOffset';
@@ -25,20 +25,26 @@ function App() {
     let currentTimeZoneOffset = currentDate.getTimezoneOffset();
     let minutesDifference = (fromTime - toTime) + currentTimeZoneOffset;
     if (minutesDifference > 0) {
-      setTimeDiff(parseInt('-' + timeTransformer(minutesDifference),10));
+      setTimeDiff(parseInt('-' + timeTransformer(minutesDifference), 10));
     } else {
       setTimeDiff(timeTransformer(minutesDifference));
     }
-  });
+    //basically fixed the issue of the loop, 
+    // (like in react component class- when we update state on component did upadte , it kepts on update loop)
+    // refrer to https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+  }, [meridiem, hour, minute]);
 
   useEffect(() => {
-		let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
-		if (timezone) {
-			setOffset(timezone);
-		} else {
-			setOffset([]);
-		}
-	});
+    let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
+    if (timezone) {
+      setOffset(timezone);
+    } else {
+      setOffset([]);
+    }
+    //basically fixed the issue of the loop, 
+    // (like in react component class- when we update state on component did upadte , it kepts on update loop)
+    // refrer to https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
+  }, [timeDiff]);
 
   function timeTransformer(minutesDifference) {
     minutesDifference = Math.abs(minutesDifference);
@@ -63,14 +69,14 @@ function App() {
           <TimePicker
             focused
             onTimeChange=
-            { (options) => { setHour(parseInt(options.hour, 10)); setMinute(parseInt(options.minute, 10)); setMeridiem(options.meridiem);} }
+            {(options) => { setHour(parseInt(options.hour, 10)); setMinute(parseInt(options.minute, 10)); setMeridiem(options.meridiem); }}
             time={hour + ':' + minute}
             meridiem={meridiem}
             theme="material"
             colorPalette="dark"
             timeMode="12"
             showTimezone={true}
-            closeOnOutsideClick={false}/>
+            closeOnOutsideClick={false} />
         </div>
         <div className="six columns">
           <ul>
