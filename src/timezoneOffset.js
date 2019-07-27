@@ -505,7 +505,7 @@ export const timezoneOffset = [
     ]
   },
   {
-    "value": "Greenwich Mean Time",
+    "value": "GMT Standard Time",
     "abbr": "GMT",
     "offset": 0,
     "isdst": false,
@@ -734,6 +734,7 @@ export const timezoneOffset = [
       "Europe/Uzhgorod",
       "Europe/Vilnius",
       "Europe/Zaporozhye"
+
     ]
   },
   {
@@ -880,7 +881,7 @@ export const timezoneOffset = [
     "isdst": false,
     "text": "(UTC+03:00) Moscow, St. Petersburg, Volgograd",
     "utc": [
-      "Europe/Kirov",
+	    "Europe/Kirov",
       "Europe/Moscow",
       "Europe/Simferopol",
       "Europe/Volgograd"
@@ -893,9 +894,9 @@ export const timezoneOffset = [
     "isdst": false,
     "text": "(UTC+04:00) Samara, Ulyanovsk, Saratov",
     "utc": [
-      "Europe/Astrakhan",
+	    "Europe/Astrakhan",
       "Europe/Samara",
-      "Europe/Ulyanovsk"
+	    "Europe/Ulyanovsk"
     ]
   },
   {
@@ -944,7 +945,7 @@ export const timezoneOffset = [
   },
   {
     "value": "Georgian Standard Time",
-    "abbr": "GST",
+    "abbr": "GET",
     "offset": 4,
     "isdst": false,
     "text": "(UTC+04:00) Tbilisi",
@@ -1039,7 +1040,7 @@ export const timezoneOffset = [
     "isdst": false,
     "text": "(UTC+05:45) Kathmandu",
     "utc": [
-      "Asia/Katmandu"
+      "Asia/Kathmandu"
     ]
   },
   {
@@ -1409,4 +1410,4 @@ export const timezoneOffset = [
       "Pacific/Apia"
     ]
   }
-]
+];

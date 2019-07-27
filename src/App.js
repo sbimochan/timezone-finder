@@ -38,7 +38,7 @@ function App() {
 		} else {
 			setOffset([]);
 		}
-	});
+	},[timeDiff]);
 
   function timeTransformer(minutesDifference) {
     minutesDifference = Math.abs(minutesDifference);
