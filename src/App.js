@@ -29,7 +29,7 @@ function App() {
     } else {
       setTimeDiff(timeTransformer(minutesDifference));
     }
-  });
+  }, [meridiem, hour, minute]);
 
   useEffect(() => {
 		let timezone = timezoneOffset.filter(el => el.offset === timeDiff);
