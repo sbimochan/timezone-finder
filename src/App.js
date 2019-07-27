@@ -1,10 +1,12 @@
-import './normalize.css';
-import './skeleton.css';
-import 'react-times/css/material/default.css';
 import React, { useState, useEffect } from 'react';
 
 import TimePicker from 'react-times';
 import { timezoneOffset } from './timezoneOffset';
+
+import './normalize.css';
+import './skeleton.css';
+import 'react-times/css/material/default.css';
+import './App.css';
 
 function App() {
   const [hour,
@@ -61,28 +63,27 @@ function App() {
 
   return (
     <div className='container'>
+
       <div className="row mb-30">
         <h3>Time zone finder</h3>
       </div>
       <div className='row'>
         <div className='six columns'>
-          <TimePicker
-            focused
-            onTimeChange=
-            {(options) => { setHour(parseInt(options.hour, 10)); setMinute(parseInt(options.minute, 10)); setMeridiem(options.meridiem); }}
-            time={hour + ':' + minute}
-            meridiem={meridiem}
-            theme="material"
-            colorPalette="dark"
-            timeMode="12"
-            showTimezone={true}
-            closeOnOutsideClick={false} />
+            <TimePicker
+              focused
+              onTimeChange=
+              {(options) => { setHour(parseInt(options.hour, 10)); setMinute(parseInt(options.minute, 10)); setMeridiem(options.meridiem); }}
+              time={hour + ':' + minute}
+              meridiem={meridiem}
+              theme="material"
+              colorPalette="dark"
+              timeMode="12"
+              showTimezone={true}
+              closeOnOutsideClick={false} />
         </div>
-        <div className="six columns">
-          <ul>
-            {offset.map((el, index) => <li key={index}>{el.utc + ' ' + el.text}</li>)}
-          </ul>
-        </div>
+        <ul className="six columns time-detail">
+          {offset.map((el, index) => <li key={index}>{el.utc + ' ' + el.text}</li>)}
+        </ul>
       </div>
     </div>
   )
