@@ -21,7 +21,7 @@ function App() {
     const toTime =
       meridiem === "PM" ? (hour + 12) * 60 + minute : hour * 60 + minute;
     const currentTimeZoneOffset = currentDate.getTimezoneOffset();
-    const minutesDifference = fromTime - toTime + currentTimeZoneOffset;
+    const minutesDifference = (fromTime - toTime) + currentTimeZoneOffset;
     if (minutesDifference > 0) {
       setTimeDiff(parseInt("-" + timeTransformer(minutesDifference), 10));
     } else {
@@ -39,9 +39,9 @@ function App() {
   }, [timeDiff]);
 
   function timeTransformer(minutesDifference) {
-    minutesDifference = Math.abs(minutesDifference);
-    const hour = Math.floor(minutesDifference / 60);
-    const minute = minutesDifference % 60;
+    const absMinutesDifference = Math.abs(minutesDifference);
+    const hour = Math.floor(absMinutesDifference / 60);
+    const minute = absMinutesDifference % 60;
     const roundUp = Math.round(minute / 5) * 5;
     if (roundUp) {
       const time = hour + "." + roundUp;
