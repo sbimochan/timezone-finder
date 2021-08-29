@@ -6,8 +6,7 @@
   word-wrap: break-word;
 }
 
-
-.time_picker_container .modal_container{
+.time_picker_container .modal_container {
   position: static;
   margin-bottom: 30px;
 }
@@ -16,4 +15,36 @@
   .six.columns {
     width: 48%;
   }
+  .possible-locations {
+    max-width: 320px;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  .possible-locations {
+    max-width: 230px;
+  }
+}
+
+@media only screen and (max-width: 375px) {
+  .possible-locations {
+    max-width: 230px;
+  }
+}
+
+.time-zone {
+  max-width: 100px;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden;
+}
+
+thead {
+  background-color: #e6ebef;
+}
+
+.no-result {
+  text-align: center;
+  padding: 40px 0;
 }
