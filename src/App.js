@@ -5,7 +5,8 @@ import "./App.css";
 import React, { useState, useEffect } from "react";
 
 import TimePicker from "react-times";
-import { timezoneOffset } from "./timezoneOffset";
+import timezoneOffset from 'timezones.json';
+// import { timezoneOffset } from "./timezoneOffset";
 
 
 function App() {
@@ -52,12 +53,12 @@ function App() {
   }
 
   return (
-    <div className="container">
+    <div className="container overflow-x-hidden">
       <div className="row mb-30">
         <h3>Time zone finder</h3>
       </div>
       <div className="row">
-        <div className="six columns">
+        <div className="four columns">
           <TimePicker
             focused
             onTimeChange={(options) => {
@@ -74,11 +75,28 @@ function App() {
             closeOnOutsideClick={false}
           />
         </div>
-        <ul className="six columns time-detail">
-          {offset.map((el, index) => (
-            <li key={index}>{el.utc + " " + el.text}</li>
-          ))}
-        </ul>
+        <table className="eight columns time-detail ">
+          <thead>
+            <tr>
+              <th>Time Zone</th>
+              <th className="possible-locations">Possible Locations</th>
+            </tr>
+          </thead>
+          <tbody>
+            {offset.length > 0 ? (
+              offset.map((el, index) => (
+                <tr key={index}>
+                  <td className="time-zone">{el.text}</td>
+                  <td className="possible-locations">{el.utc}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="2" className="time-zone no-result">No Result</td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       </div>
     </div>
   );
