@@ -1,12 +1,12 @@
+import "./normalize.css";
+import "./skeleton.css";
+import "react-times/css/material/default.css";
+import "./App.css";
 import React, { useState, useEffect } from "react";
 
 import TimePicker from "react-times";
 import { timezoneOffset } from "./timezoneOffset";
 
-import "./normalize.css";
-import "./skeleton.css";
-import "react-times/css/material/default.css";
-import "./App.css";
 
 function App() {
   const [hour, setHour] = useState(10);
@@ -16,12 +16,12 @@ function App() {
   const [offset, setOffset] = useState([]);
 
   useEffect(() => {
-    let currentDate = new Date();
-    let fromTime = currentDate.getHours() * 60 + currentDate.getMinutes();
-    let toTime =
+    const currentDate = new Date();
+    const fromTime = currentDate.getHours() * 60 + currentDate.getMinutes();
+    const toTime =
       meridiem === "PM" ? (hour + 12) * 60 + minute : hour * 60 + minute;
-    let currentTimeZoneOffset = currentDate.getTimezoneOffset();
-    let minutesDifference = fromTime - toTime + currentTimeZoneOffset;
+    const currentTimeZoneOffset = currentDate.getTimezoneOffset();
+    const minutesDifference = fromTime - toTime + currentTimeZoneOffset;
     if (minutesDifference > 0) {
       setTimeDiff(parseInt("-" + timeTransformer(minutesDifference), 10));
     } else {
@@ -30,7 +30,7 @@ function App() {
   }, [meridiem, hour, minute]);
 
   useEffect(() => {
-    let timezone = timezoneOffset.filter((el) => el.offset === timeDiff);
+    const timezone = timezoneOffset.filter((el) => el.offset === timeDiff);
     if (timezone) {
       setOffset(timezone);
     } else {
@@ -40,11 +40,11 @@ function App() {
 
   function timeTransformer(minutesDifference) {
     minutesDifference = Math.abs(minutesDifference);
-    let hour = Math.floor(minutesDifference / 60);
-    let minute = minutesDifference % 60;
-    let roundUp = Math.round(minute / 5) * 5;
+    const hour = Math.floor(minutesDifference / 60);
+    const minute = minutesDifference % 60;
+    const roundUp = Math.round(minute / 5) * 5;
     if (roundUp) {
-      let time = hour + "." + roundUp;
+      const time = hour + "." + roundUp;
       return parseInt(time, 10);
     } else {
       return hour;
